@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="113306056_HW5.css">
+</head>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="113306056_HW5.css">
+</head>
+<body>
+  <div class="main-container">
+    <div class="left-panel">
+      <div class="photo-panel">
+        <img src="image10.jpg" alt="Profile Photo">
+      </div>
+      <div class="text-content">
+        <h2 class="name">吳雨珊</h2>
+        <div class="about-section">
+          <h3>ABOUT ME</h3>
+          <p>I am a freshman in the Department of Information Management at National Chengchi University. I'm passionate about web development and always eager to learn new technologies.</p>
+        </div>
+        <div class="contact-section">
+          <h3>CONTACT</h3>
+          <p>113306056@nccu.edu.tw</p>
+          <p>github.com/113306056</p>
+        </div>
+        <div class="nccu-logo">
+          <img src="image9.jpg" alt="NCCU Logo">
+        </div>
+      </div>
+    </div>
+    <div class="right-panel">
+      <section class="education-section">
+        <h2>Education</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <p>2023-2024</p>
+            <div class="description">
+              <h4>National Chengchi University, Department of MIS</h4>
+              <p>Computer Science</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <p>2020-2023</p>
+            <div class="description">
+              <h4>Taichung City Girl School</h4>
+              <p>Participated in model united nation club</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <p>2019-2020</p>
+            <div class="description">
+              <h4>Middle School Generation</h4>
+              <p>Started developing an interest in computer science</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="homework-section">
+        <h2>Homework List</h2>
+        <div class="homework-links">
+          <a href="https://github.com/113306056/HW1.git">HW1</a>
+          <a href="https://github.com/113306056/HW2.git">HW2</a>
+          <a href="https://github.com/113306056/HW3.git">HW3</a>
+          <a href="https://github.com/113306056/113306056_HW4.git">HW4</a>
+          <a href="https://github.com/113306056/113306056_LAB1.git">LAB1</a>
+          <a href="https://github.com/113306056/113306056_LAB2.git">LAB2</a>
+        </div>
+      </section>
+      <section class="music-section">
+        <h2>Favorite Music</h2>
+        <div class="music-grid">
+          <div class="music-icon">
+            <a href="https://open.spotify.com/track/6dgUya35uo964z7GZXM07g?si=dd2bdc738dce41e5">
+              <img src="image11.jpg" alt="Music 1">
+            </a>
+            <p>Nonsense</p>
+          </div>
+          <div class="music-icon">
+            <a href="https://open.spotify.com/track/0lizgQ7Qw35od7CYaoMBZb?si=de68723c58424a04">
+              <img src="image12.jpg" alt="Music 2">
+            </a>
+            <p>Santa tell me</p>
+          </div>
+          <div class="music-icon">
+            <a href="https://open.spotify.com/track/4nNaEmvwoI8IOP0XtnzZJn?si=13e95619756d4f90">
+              <img src="image13.jpg" alt="Music 3">
+            </a>
+            <p>公館青少年</p>
+          </div>
+          <div class="music-icon">
+            <a href="https://open.spotify.com/track/3Sp9bi6Oj8rWmWhPXpyZ5l?si=6c69d4d1218d4c2d">
+              <img src="image14.jpg" alt="Music 4">
+            </a>
+            <p>都是weather你</p>
+          </div>
+        </div>
+        <p class="music-note">Music helps me focus while coding and brings joy to my daily routine.</p>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () =>{
+  const nameSection = document.querySelector(".name");
+  const editButton = document.createElement("button");
+  let isEditing = false;
+
+  editButton.textContent = "Edit";
+  nameSection.after(editButton);
+
+  editButton.addEventListener("click", () =>{
+    if(isEditing){
+      const inputField = document.querySelector(".name input");
+      nameSection.textContent = inputField.value;
+      inputField.remove();
+      editButton.textContent = "Edit";
+    }else{
+      const inputField = document.createElement("input");
+      inputField.value = nameSection.textContent;
+      nameSection.textContent = "";
+      nameSection.appendChild(inputField);
+      editButton.textContent = "Save";
+    }
+    isEditing = !isEditing;
+  })
+})
+
+const addButton = document.createElement("button");
+const musicSection = document.querySelector(".music-grid");
+addButton.textContent = "Add Music";
+musicSection.after(addButton);
+
+addButton.addEventListener("click", () =>{
+  const form = document.createElement("form");
+  form.innerHTML = `
+  <input type="text" placeholder="Music Name" required />
+    <input type="url" placeholder="Music URL" required />
+    <button type="submit">Submit</button>
+    `;
+    addButton.after(form);
+
+    form.addEventListener("submit", (e) =>{
+      e.preventDefault();
+      const [nameInput, urlInput] = form.querySelectorAll("input");
+      if(nameInput.value && urlInput.value){
+        const musicItem = document.createElement("div");
+        musicItem.classList.add("music-item");
+        musicItem.innerHTML = `
+        <a href="${urlInput.value}" target="_blank">
+              <img src="image20.png" alt="${nameInput.value}" class="music-icon" />
+            </a>
+            <p>${nameInput.value}</p>
+            `;
+            musicSection.appendChild(musicItem);
+            form.remove();
+      }else{
+        alert("Please fill out all fields!");
+      }
+    });
+});
+
+  </script>
+
+</body>
+</html>
